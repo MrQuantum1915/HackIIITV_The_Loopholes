@@ -20,11 +20,9 @@ const Navbar: React.FC = () => {
       <div className="max-w-7xl mx-auto flex justify-between items-center">
         {/* Logo */}
         <Link to="/" className="flex items-center space-x-2">
-          <div className="bg-compass-600 text-white p-2 rounded-md">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <circle cx="12" cy="12" r="10"/>
-              <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>
-            </svg>
+          <div className="text-white rounded-md">
+            
+            <img src="/logo.webp" alt="Logo" className="h-10 w-10" />
           </div>
           <span className="text-2xl font-bold text-compass-700">Loopholes</span>
         </Link>

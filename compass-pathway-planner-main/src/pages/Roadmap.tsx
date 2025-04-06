@@ -127,20 +127,24 @@ const Roadmap = () => {
   const [activeTab, setActiveTab] = useState("overview");
   const [roadmapHtml, setRoadmapHtml] = useState<string | null>(null);
   const [userData, setUserData] = useState<any>(null);
-  
+
   useEffect(() => {
     // Retrieve the generated roadmap from localStorage
     const storedRoadmap = localStorage.getItem('generatedRoadmap');
     const storedUserData = localStorage.getItem('userData');
-    
+
     if (storedRoadmap) {
       setRoadmapHtml(storedRoadmap);
     }
-    
+
     if (storedUserData) {
       try {
         const parsedData = JSON.parse(storedUserData);
         setUserData(parsedData);
+
+        const explorationPreference = parsedData.explorationPreference;
+        console.log("Exploration Preference:", explorationPreference);
+
       } catch (err) {
         console.error('Error parsing user data:', err);
       }
@@ -148,7 +152,7 @@ const Roadmap = () => {
   }, []);
 
   return (
-    <PageLayout 
+    <PageLayout
       title="Your Academic Roadmap"
       subtitle="Your personalized pathway to academic and career success"
     >
@@ -170,7 +174,7 @@ const Roadmap = () => {
                     {userData?.major || mockRoadmapData.major}
                   </p>
                 </div>
-                
+
                 <div>
                   <div className="flex justify-between text-sm mb-1">
                     <span>Overall Progress</span>
@@ -178,35 +182,35 @@ const Roadmap = () => {
                   </div>
                   <Progress value={mockRoadmapData.progress} className="h-2" />
                 </div>
-                
+
                 <div className="pt-2 space-y-3">
                   <h4 className="text-sm font-medium">Short-term Goals</h4>
                   <ul className="space-y-2">
-                    {(userData?.shortTermGoals 
-                      ? [userData.shortTermGoals] 
+                    {(userData?.shortTermGoals
+                      ? [userData.shortTermGoals]
                       : mockRoadmapData.shortTermGoals).map((goal: string, index: number) => (
-                      <li key={index} className="flex items-start text-sm">
-                        <ChevronRight className="h-4 w-4 mr-2 text-compass-500 shrink-0 mt-0.5" />
-                        <span>{goal}</span>
-                      </li>
-                    ))}
+                        <li key={index} className="flex items-start text-sm">
+                          <ChevronRight className="h-4 w-4 mr-2 text-compass-500 shrink-0 mt-0.5" />
+                          <span>{goal}</span>
+                        </li>
+                      ))}
                   </ul>
                 </div>
-                
+
                 <div className="pt-2 space-y-3">
                   <h4 className="text-sm font-medium">Long-term Goals</h4>
                   <ul className="space-y-2">
-                    {(userData?.longTermGoals 
-                      ? [userData.longTermGoals] 
+                    {(userData?.longTermGoals
+                      ? [userData.longTermGoals]
                       : mockRoadmapData.longTermGoals).map((goal: string, index: number) => (
-                      <li key={index} className="flex items-start text-sm">
-                        <ChevronRight className="h-4 w-4 mr-2 text-compass-500 shrink-0 mt-0.5" />
-                        <span>{goal}</span>
-                      </li>
-                    ))}
+                        <li key={index} className="flex items-start text-sm">
+                          <ChevronRight className="h-4 w-4 mr-2 text-compass-500 shrink-0 mt-0.5" />
+                          <span>{goal}</span>
+                        </li>
+                      ))}
                   </ul>
                 </div>
-                
+
                 <div className="pt-4">
                   <Button variant="outline" size="sm" className="w-full">
                     <Link to="/planner" className="flex items-center justify-center w-full">
@@ -218,7 +222,7 @@ const Roadmap = () => {
             </CardContent>
           </Card>
         </div>
-        
+
         {/* Main content area with tabs */}
         <div className="md:col-span-2">
           <Card>
@@ -241,12 +245,12 @@ const Roadmap = () => {
                   <TabsTrigger value="mentors">Mentors</TabsTrigger>
                   <TabsTrigger value="resources">Resources</TabsTrigger>
                 </TabsList>
-                
+
                 {/* Overview Tab - Now with Gemini-generated content */}
                 <TabsContent value="overview" className="space-y-6">
                   {roadmapHtml ? (
-                    <div className="roadmap-content prose max-w-none" 
-                         dangerouslySetInnerHTML={{ __html: roadmapHtml }}>
+                    <div className="roadmap-content prose max-w-none"
+                      dangerouslySetInnerHTML={{ __html: roadmapHtml }}>
                     </div>
                   ) : (
                     // Fallback to the existing overview UI if no generated content
@@ -278,7 +282,7 @@ const Roadmap = () => {
                           </Button>
                         </div>
                       </div>
-                      
+
                       <div>
                         <h3 className="text-lg font-medium mb-3">Recommended Courses</h3>
                         <div className="space-y-3">
@@ -306,7 +310,7 @@ const Roadmap = () => {
                           </Button>
                         </div>
                       </div>
-                      
+
                       <div>
                         <h3 className="text-lg font-medium mb-3">Featured Resources</h3>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -335,7 +339,7 @@ const Roadmap = () => {
                     </>
                   )}
                 </TabsContent>
-                
+
                 {/* Courses Tab */}
                 <TabsContent value="courses" className="space-y-4">
                   <h3 className="text-lg font-medium mb-2">Recommended Courses</h3>
@@ -368,7 +372,7 @@ const Roadmap = () => {
                       </Card>
                     ))}
                   </div>
-                  
+
                   <div className="bg-compass-50 rounded-lg p-4 mt-6">
                     <div className="flex items-start space-x-3">
                       <div className="bg-compass-100 p-2 rounded-full">
@@ -383,7 +387,7 @@ const Roadmap = () => {
                     </div>
                   </div>
                 </TabsContent>
-                
+
                 {/* Mentors Tab */}
                 <TabsContent value="mentors" className="space-y-4">
                   <div className="flex justify-between items-center mb-4">
@@ -392,7 +396,7 @@ const Roadmap = () => {
                       Find More Mentors
                     </Button>
                   </div>
-                  
+
                   <div className="grid grid-cols-1 gap-4">
                     {mockRoadmapData.mentors.map(mentor => (
                       <Card key={mentor.id} className="bg-white border border-gray-100">
@@ -428,7 +432,7 @@ const Roadmap = () => {
                       </Card>
                     ))}
                   </div>
-                  
+
                   <div className="text-center pt-4">
                     <p className="text-sm text-gray-500 mb-2">Don't see a mentor that matches your needs?</p>
                     <Button variant="outline" size="sm">
@@ -436,7 +440,7 @@ const Roadmap = () => {
                     </Button>
                   </div>
                 </TabsContent>
-                
+
                 {/* Resources Tab */}
                 <TabsContent value="resources" className="space-y-4">
                   <div className="flex justify-between items-center mb-4">
@@ -450,7 +454,7 @@ const Roadmap = () => {
                       </Button>
                     </div>
                   </div>
-                  
+
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {mockRoadmapData.resources.map(resource => (
                       <Card key={resource.id} className="bg-white border border-gray-100">
@@ -483,7 +487,7 @@ const Roadmap = () => {
                       </Card>
                     ))}
                   </div>
-                  
+
                   <div className="bg-compass-50 rounded-lg p-4 mt-2">
                     <div className="flex items-start space-x-3">
                       <div className="bg-compass-100 p-2 rounded-full">

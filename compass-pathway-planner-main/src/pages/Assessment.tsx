@@ -3,12 +3,12 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { 
-  Select, 
-  SelectContent, 
-  SelectItem, 
-  SelectTrigger, 
-  SelectValue 
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue
 } from '@/components/ui/select';
 import {
   Card,
@@ -24,7 +24,7 @@ import { generateRoadmap } from '@/services/geminiService';
 
 const Assessment = () => {
   const navigate = useNavigate();
-  
+
   // Form state
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({
@@ -38,7 +38,10 @@ const Assessment = () => {
     currentCourses: [] as string[],
     strengths: [] as string[],
     challenges: [] as string[],
-    preferredLearningStyle: '',
+    programmingLanguages: [] as string[],
+    techDomainsExplored: [] as string[], 
+    explorationPreference: '',
+
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -61,8 +64,8 @@ const Assessment = () => {
       e.preventDefault();
       const value = e.currentTarget.value.trim();
       if (!formData[name as keyof typeof formData].includes(value)) {
-        setFormData(prev => ({ 
-          ...prev, 
+        setFormData(prev => ({
+          ...prev,
           [name]: [...(prev[name as keyof typeof formData] as string[]), value]
         }));
       }
@@ -99,19 +102,19 @@ const Assessment = () => {
     // Show loading state
     setIsSubmitting(true);
     toast.loading("Generating your personalized roadmap...");
-    
+
     try {
       // Generate the roadmap using Gemini API
       const roadmapContent = await generateRoadmap(formData);
-      
+
       // Store the generated roadmap in localStorage to use in the Roadmap page
       localStorage.setItem('generatedRoadmap', roadmapContent);
       localStorage.setItem('userData', JSON.stringify(formData));
-      
+
       // Show success message
       toast.dismiss();
       toast.success("Assessment completed! Your personalized roadmap is ready.");
-      
+
       // Navigate to the roadmap page
       navigate('/roadmap');
     } catch (error) {
@@ -133,11 +136,11 @@ const Assessment = () => {
         <div className="mb-8">
           <div className="flex justify-between mb-2">
             {[...Array(totalSteps)].map((_, index) => (
-              <div 
+              <div
                 key={index}
                 className={`w-full ${index > 0 ? 'ml-2' : ''}`}
               >
-                <div 
+                <div
                   className={`h-2 rounded-full ${index + 1 <= currentStep ? 'bg-compass-600' : 'bg-gray-200'}`}
                 ></div>
               </div>
@@ -152,7 +155,7 @@ const Assessment = () => {
           <CardHeader>
             <CardTitle className="text-2xl">
               {currentStep === 1 && "Basic Information"}
-              {currentStep === 2 && "Academic Background"}
+              {currentStep === 2 && "Technical Skills Background"}
               {currentStep === 3 && "Goals & Aspirations"}
               {currentStep === 4 && "Learning Preferences"}
             </CardTitle>
@@ -163,7 +166,7 @@ const Assessment = () => {
               {currentStep === 4 && "Help us understand how you learn best."}
             </CardDescription>
           </CardHeader>
-          
+
           <CardContent>
             {/* Step 1: Basic Information */}
             {currentStep === 1 && (
@@ -181,7 +184,7 @@ const Assessment = () => {
                     required
                   />
                 </div>
-                
+
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
                     Email Address
@@ -196,7 +199,7 @@ const Assessment = () => {
                     required
                   />
                 </div>
-                
+
                 <div>
                   <label htmlFor="major" className="block text-sm font-medium text-gray-700 mb-1">
                     Major/Field of Study
@@ -210,7 +213,7 @@ const Assessment = () => {
                     required
                   />
                 </div>
-                
+
                 <div>
                   <label htmlFor="year" className="block text-sm font-medium text-gray-700 mb-1">
                     Current Year
@@ -233,28 +236,28 @@ const Assessment = () => {
                 </div>
               </div>
             )}
-            
+
             {/* Step 2: Academic Background */}
             {currentStep === 2 && (
               <div className="space-y-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Current Courses (Press Enter after each course)
+                    Programming Languages (Press Enter after each language)
                   </label>
                   <Input
-                    onKeyDown={(e) => handleMultiInputChange('currentCourses', e)}
-                    placeholder="Add a course you're currently taking"
+                    onKeyDown={(e) => handleMultiInputChange('programmingLanguages', e)}
+                    placeholder="Add a programming language you know"
                   />
-                  
+
                   <div className="mt-2 flex flex-wrap gap-2">
-                    {formData.currentCourses.map((course, index) => (
-                      <div 
-                        key={index} 
+                    {formData.programmingLanguages.map((language, index) => (
+                      <div
+                        key={index}
                         className="bg-compass-100 text-compass-800 px-3 py-1 rounded-full flex items-center"
                       >
-                        <span className="mr-1">{course}</span>
-                        <button 
-                          onClick={() => removeItem('currentCourses', index)}
+                        <span className="mr-1">{language}</span>
+                        <button
+                          onClick={() => removeItem('programmingLanguages', index)}
                           className="text-compass-600 hover:text-compass-800"
                         >
                           ×
@@ -263,7 +266,32 @@ const Assessment = () => {
                     ))}
                   </div>
                 </div>
-                
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Tech Domains Explored (Press Enter after each domain)
+                  </label>
+                  <Input
+                    onKeyDown={(e) => handleMultiInputChange('techDomainsExplored', e)}
+                    placeholder="Add a tech domain you've explored"
+                  />
+
+                  <div className="mt-2 flex flex-wrap gap-2">
+                    {formData.techDomainsExplored.map((domain, index) => (
+                      <div
+                        key={index}
+                        className="bg-compass-100 text-compass-800 px-3 py-1 rounded-full flex items-center"
+                      >
+                        <span className="mr-1">{domain}</span>
+                        <button
+                          onClick={() => removeItem('techDomainsExplored', index)}
+                          className="text-compass-600 hover:text-compass-800"
+                        >
+                          ×
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
                     Areas of Interest (Press Enter after each interest)
@@ -272,15 +300,15 @@ const Assessment = () => {
                     onKeyDown={(e) => handleMultiInputChange('interests', e)}
                     placeholder="Add an area of interest"
                   />
-                  
+
                   <div className="mt-2 flex flex-wrap gap-2">
                     {formData.interests.map((interest, index) => (
-                      <div 
-                        key={index} 
+                      <div
+                        key={index}
                         className="bg-compass-100 text-compass-800 px-3 py-1 rounded-full flex items-center"
                       >
                         <span className="mr-1">{interest}</span>
-                        <button 
+                        <button
                           onClick={() => removeItem('interests', index)}
                           className="text-compass-600 hover:text-compass-800"
                         >
@@ -290,7 +318,7 @@ const Assessment = () => {
                     ))}
                   </div>
                 </div>
-                
+
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
                     Strengths (Press Enter after each strength)
@@ -299,15 +327,15 @@ const Assessment = () => {
                     onKeyDown={(e) => handleMultiInputChange('strengths', e)}
                     placeholder="Add an academic strength"
                   />
-                  
+
                   <div className="mt-2 flex flex-wrap gap-2">
                     {formData.strengths.map((strength, index) => (
-                      <div 
-                        key={index} 
+                      <div
+                        key={index}
                         className="bg-compass-100 text-compass-800 px-3 py-1 rounded-full flex items-center"
                       >
                         <span className="mr-1">{strength}</span>
-                        <button 
+                        <button
                           onClick={() => removeItem('strengths', index)}
                           className="text-compass-600 hover:text-compass-800"
                         >
@@ -317,7 +345,7 @@ const Assessment = () => {
                     ))}
                   </div>
                 </div>
-                
+
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
                     Challenges (Press Enter after each challenge)
@@ -326,15 +354,15 @@ const Assessment = () => {
                     onKeyDown={(e) => handleMultiInputChange('challenges', e)}
                     placeholder="Add an academic challenge"
                   />
-                  
+
                   <div className="mt-2 flex flex-wrap gap-2">
                     {formData.challenges.map((challenge, index) => (
-                      <div 
-                        key={index} 
+                      <div
+                        key={index}
                         className="bg-compass-100 text-compass-800 px-3 py-1 rounded-full flex items-center"
                       >
                         <span className="mr-1">{challenge}</span>
-                        <button 
+                        <button
                           onClick={() => removeItem('challenges', index)}
                           className="text-compass-600 hover:text-compass-800"
                         >
@@ -346,7 +374,7 @@ const Assessment = () => {
                 </div>
               </div>
             )}
-            
+
             {/* Step 3: Goals & Aspirations */}
             {currentStep === 3 && (
               <div className="space-y-4">
@@ -363,7 +391,7 @@ const Assessment = () => {
                     rows={4}
                   />
                 </div>
-                
+
                 <div>
                   <label htmlFor="shortTermGoals" className="block text-sm font-medium text-gray-700 mb-1">
                     Short-term Academic Goals
@@ -379,31 +407,28 @@ const Assessment = () => {
                 </div>
               </div>
             )}
-            
+
             {/* Step 4: Learning Preferences */}
             {currentStep === 4 && (
               <div className="space-y-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Preferred Learning Style
+                    Preferred Exploration Style
                   </label>
                   <Select
-                    value={formData.preferredLearningStyle}
-                    onValueChange={(value) => handleSelectChange('preferredLearningStyle', value)}
+                    value={formData.explorationPreference}
+                    onValueChange={(value) => handleSelectChange('explorationPreference', value)}
                   >
                     <SelectTrigger>
-                      <SelectValue placeholder="Select your learning style" />
+                      <SelectValue placeholder="Select your preference" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="visual">Visual (learn by seeing)</SelectItem>
-                      <SelectItem value="auditory">Auditory (learn by hearing)</SelectItem>
-                      <SelectItem value="reading">Reading/Writing</SelectItem>
-                      <SelectItem value="kinesthetic">Kinesthetic (learn by doing)</SelectItem>
-                      <SelectItem value="mixed">Mixed/Combination</SelectItem>
+                      <SelectItem value="project-based">Project-Based Exploration</SelectItem>
+                      <SelectItem value="traditional-roadmap">Traditional Roadmap</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
-                
+
                 <div className="pt-4">
                   <p className="text-center text-gray-600 mb-4">
                     Thank you for completing the assessment! Click "Submit" to generate your personalized roadmap.
@@ -412,7 +437,7 @@ const Assessment = () => {
               </div>
             )}
           </CardContent>
-          
+
           <CardFooter className="flex justify-between">
             <Button
               variant="outline"
@@ -421,8 +446,8 @@ const Assessment = () => {
             >
               Back
             </Button>
-            
-            <Button 
+
+            <Button
               onClick={nextStep}
               className="bg-compass-600 hover:bg-compass-700"
               disabled={isSubmitting}
@@ -445,3 +470,4 @@ const Assessment = () => {
 };
 
 export default Assessment;
+

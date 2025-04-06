@@ -33,11 +33,8 @@ const PageLayout: React.FC<PageLayoutProps> = ({
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="mb-4 md:mb-0">
               <div className="flex items-center space-x-2">
-                <div className="bg-compass-600 text-white p-1 rounded-md">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <circle cx="12" cy="12" r="10"/>
-                    <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>
-                  </svg>
+                <div className="text-white rounded-md">
+                <img src="/logo.webp" alt="Logo" className="h-8 w-8" />
                 </div>
                 <span className="font-bold text-compass-700">Loopholes</span>
               </div>

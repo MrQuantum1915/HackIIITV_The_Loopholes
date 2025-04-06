@@ -3,17 +3,20 @@ import { toast } from "sonner";
 
 // Interface for the assessment form data
 export interface AssessmentFormData {
-  name: string;
-  email: string;
-  major: string;
-  year: string;
-  interests: string[];
-  longTermGoals: string;
-  shortTermGoals: string;
-  currentCourses: string[];
-  strengths: string[];
-  challenges: string[];
-  preferredLearningStyle: string;
+  name,
+  email,
+  major,
+  year,
+  interests,
+  longTermGoals,
+  shortTermGoals,
+  currentCourses,
+  strengths,
+  challenges,
+  preferredLearningStyle,
+  programmingLanguages,
+  techDomainsExplored,
+  explorationPreference,
 }
 
 // The curriculum data (static for now, could be fetched from an API)
@@ -203,9 +206,39 @@ export const generateRoadmap = async (formData: AssessmentFormData): Promise<str
     const userData = JSON.stringify(formData, null, 2);
     console.log('Sending User Data:', userData);
 
-    // Prepare the prompt for Gemini
-    const prompt = `You are an expert AI mentor helping a student build a personalized learning roadmap based on the provided user data and the institute's curriculum structure, generate a personalized roadmap that aligns with the academic timeline and milestones. The roadmap should assess the student's current knowledge, identify gaps, and recommend a step-by-step plan to master GenAI concepts, tools, and applications.
+    let explorationPreferenceValue = userData;
 
+
+    const parsedUserData = JSON.parse(userData);
+    if (parsedUserData.explorationPreference) {
+      explorationPreferenceValue = parsedUserData.explorationPreference;
+    }
+
+    let prompt = "";
+    if (explorationPreferenceValue === "project-based") {
+      prompt += ` The student prefers a project-based approach to exploring new tech fields instead of traditional Roadmaps.
+      Give several project ideas aligning with what they are studying right now in there curriculum.
+      
+      1 Analyze the student's current knowledge and experience (provided in the input).
+      2 Identify nearby curriculum topics.
+      3 Project ideas should be specific, creative, and unique, rather than generic.
+      4 Define the overall structure of the project, but don't tell us how to do it or step by step process, keep it open-ended.
+      5 Give atleast 6 ideas. 
+
+
+      Output rules:
+      1 Enclose all content in one <div>.
+      2 Use a new <div style="border: 1px solid; padding: 10px; margin: 10px 0;"> for each idea.
+      3 Use HTML tags for formatting (e.g., <b>, <i>, <ul>, <li>) without Markdown.
+      4 Do not add code fences
+      5 Do not specify font colors or background colors.
+      6 Ensure clear, structured, and readable output.`
+    }
+    else {
+      // Prepare the prompt for Gemini
+      prompt = `You are an expert AI mentor helping a student build a personalized learning roadmap based on the provided user data and the institute's curriculum structure, generate a personalized roadmap that aligns with the academic timeline and milestones. The roadmap should assess the student's current knowledge, identify gaps, and recommend a step-by-step plan.
+
+      
       1. Assess the student's current knowledge and experience from the input.
       2. Design a roadmap with monthly goals.
       3. Align the roadmap with the curriculum's timeline.
@@ -225,7 +258,7 @@ export const generateRoadmap = async (formData: AssessmentFormData): Promise<str
 
       Curriculum Structure:
       [${curriculum}]`;
-
+    }
     // Make the API call to Gemini
     const response = await fetch(`${GEMINI_API_URL}?key=${API_KEY}`, {
       method: 'POST',
@@ -248,11 +281,11 @@ export const generateRoadmap = async (formData: AssessmentFormData): Promise<str
     }
 
     const data = await response.json();
-    
+
     // Extract the generated text from the response
     const generatedText = data.candidates[0].content.parts[0].text;
     console.log('Generated Roadmap:', generatedText);
-    
+
     return generatedText;
   } catch (error) {
     console.error('Error generating roadmap:', error);

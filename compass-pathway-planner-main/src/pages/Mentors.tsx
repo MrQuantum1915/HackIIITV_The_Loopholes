@@ -38,81 +38,81 @@ import PageLayout from '@/components/PageLayout';
 const mockMentors = [
   {
     id: 1,
-    name: "Dr. Sarah Chen",
+    name: "Naveen Kumar",
     role: "Professor",
     department: "Computer Science",
-    expertise: ["Artificial Intelligence", "Machine Learning", "Neural Networks"],
+    expertise: ["Information security and privacy", " Cloud computing"],
     experience: "15+ years",
     availability: "Moderate",
     bio: "Dr. Chen is an expert in AI and machine learning with extensive industry experience at Google Research. She has published over 50 papers in top conferences and journals.",
     education: "Ph.D. in Computer Science, Stanford University",
     match: "High",
-    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=256&q=80"
+    image: "https://iiitvadodara.ac.in/assets/images/naveenkumar-500x333.jpg"
   },
   {
     id: 2,
-    name: "Prof. Michael Rodriguez",
-    role: "Associate Professor",
+    name: "Dhirendra Sinha",
+    role: "Assistant Professorr",
     department: "Electrical Engineering",
-    expertise: ["Embedded Systems", "IoT", "Robotics"],
+    expertise: ["condensed matter physicist","optoelectronic devices"],
     experience: "10+ years",
     availability: "High",
     bio: "Prof. Rodriguez specializes in embedded systems and robotics. Prior to academia, he worked at NASA's Jet Propulsion Laboratory developing systems for Mars rovers.",
     education: "Ph.D. in Electrical Engineering, MIT",
     match: "Medium",
-    image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=256&q=80"
+    image: "https://iiitvadodara.ac.in/assets/images/dhirendrasinha-500x333.jpg"
   },
   {
     id: 3,
-    name: "James Wilson",
-    role: "Senior Student",
+    name: "Ravi Nahta",
+    role: "Assistant Professor",
     department: "Computer Science",
-    expertise: ["Web Development", "Algorithms", "UI/UX Design"],
+    expertise: ["Recommender Systems", "Machine Learning"," Deep Learning", "Generative Modeling"],
     experience: "3+ years",
     availability: "High",
     bio: "James is a senior computer science student with experience in full-stack development. He has interned at Microsoft and currently serves as a teaching assistant for Algorithm Design courses.",
     education: "B.S. Computer Science (Senior Year)",
     match: "High",
-    image: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=256&q=80"
+    image: "https://iiitvadodara.ac.in/assets/images/ravi_nahta.jpeg"
   },
   {
     id: 4,
-    name: "Priya Sharma",
+    name: "Darshan Patel",
     role: "Alumni",
     department: "Software Engineering",
     expertise: ["Cloud Computing", "System Design", "DevOps"],
     experience: "5+ years",
     availability: "Low",
-    bio: "Priya is a software engineer at Microsoft working on Azure cloud services. She graduated 5 years ago and has since built expertise in cloud architecture and DevOps practices.",
-    education: "M.S. in Software Engineering",
+    bio: "Darshan is a software engineer at Google in Google Deepmind. He graduated 5 years ago and has since built expertise in ML, Deep Learning.",
+    education: "B.Tech, IIIT Vadodara",
     match: "Medium",
-    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=256&q=80"
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_3BNZw4G45qsnyRTopol8ESLnkfejmN_WcA&s"
   },
   {
     id: 5,
-    name: "Dr. Robert Chang",
-    role: "Professor",
-    department: "Data Science",
+    name: "Abhishek Pandey",
+    role: "3rd Year Student",
+    department: "Computer Science",
     expertise: ["Big Data Analytics", "Statistical Modeling", "Data Visualization"],
-    experience: "12+ years",
+    experience: "1+ years",
     availability: "Moderate",
-    bio: "Dr. Chang specializes in big data analytics and statistical modeling. He leads the university's Data Science Research Group and collaborates with major tech companies on data-driven projects.",
-    education: "Ph.D. in Statistics, UC Berkeley",
+    bio: "Abhishek specializes in big data analytics and statistical modeling. He leads the university's Data Science Research Group and collaborates with major tech companies on data-driven projects.",
+    education: "B.Tech, IIIT Vadodara",
     match: "Medium",
-    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=256&q=80"
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_3BNZw4G45qsnyRTopol8ESLnkfejmN_WcA&s"
   },
   {
     id: 6,
-    name: "Emma Thompson",
+    name: "Person",
     role: "Industry Expert",
     department: "UX Design",
     expertise: ["User Research", "Product Design", "Interaction Design"],
     experience: "8+ years",
     availability: "Low",
-    bio: "Emma is a lead UX designer at Adobe with extensive experience in product design and user research. She guest lectures occasionally and provides portfolio reviews for graduating students.",
+    bio: "He is a lead UX designer at Adobe with extensive experience in product design and user research. He guest lectures occasionally and provides portfolio reviews for graduating students.",
     education: "M.F.A. in Interaction Design, RISD",
     match: "Low",
-    image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=256&q=80"
+    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_3BNZw4G45qsnyRTopol8ESLnkfejmN_WcA&s"
   }
 ];
 
