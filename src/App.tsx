@@ -11,8 +11,7 @@ import Planner from "./pages/Planner";
 import Mentors from "./pages/Mentors";
 import Resources from "./pages/Resources";
 import NotFound from "./pages/NotFound";
-import Chatbot from './pages/Chatbot'; // Import the Chatbot component
-
+import Chatbot from './pages/Chatbot'; 
 const queryClient = new QueryClient();
 
 const App = () => (

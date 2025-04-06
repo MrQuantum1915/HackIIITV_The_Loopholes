@@ -1,4 +1,4 @@
-// In src/pages/Chatbot.tsx
+
 import React, { useState, useEffect, useRef } from 'react';
 import PageLayout from '@/components/PageLayout';
 import { Button } from '@/components/ui/button';
@@ -15,7 +15,7 @@ const Chatbot = () => {
   const chatContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Scroll to the bottom of the chat on new messages
+    
     if (chatContainerRef.current) {
       chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
     }
@@ -24,10 +24,10 @@ const Chatbot = () => {
   const handleSendMessage = () => {
     if (input.trim() === '') return;
 
-    // Add user message
+    
     setMessages([...messages, { role: 'user', content: input }]);
 
-    // Simulate assistant response (replace with actual Gemini API call)
+    
     setTimeout(() => {
       setMessages((prevMessages) => [
         ...prevMessages,
