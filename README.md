@@ -37,3 +37,6 @@ The only requirement is having Node.js & npm installed
     ```
 
     This will start the development server, providing auto-reloading and an instant preview of the project.
+
+
+**I have already uploaded the project with API key, so no need to get API key for Google AI Studio**
