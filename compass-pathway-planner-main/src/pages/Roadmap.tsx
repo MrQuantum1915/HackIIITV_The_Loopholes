@@ -78,21 +78,21 @@ const mockRoadmapData = {
   mentors: [
     {
       id: 1,
-      name: "Dr. Sarah Chen",
+      name: "Prof X",
       role: "Professor, AI Research",
       expertise: "Machine Learning, Neural Networks",
       availability: "Office hours: Tuesdays 2-4PM"
     },
     {
       id: 2,
-      name: "James Wilson",
+      name: "Person X",
       role: "Senior Student, Teaching Assistant",
       expertise: "Web Development, Algorithms",
       availability: "Available for peer mentoring M/W/F"
     },
     {
       id: 3,
-      name: "Priya Sharma",
+      name: "Person Y",
       role: "Alumni, Software Engineer at Microsoft",
       expertise: "Cloud Computing, System Design",
       availability: "Virtual meetings by appointment"

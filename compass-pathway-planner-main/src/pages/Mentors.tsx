@@ -125,7 +125,7 @@ const mockMentorshipRequests = [
     topic: "Machine Learning Project Guidance",
     message: "I'm working on a neural network project and would appreciate your insights on model optimization.",
     requestDate: "2025-04-01",
-    profileImage: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=256&q=80"
+    profileImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_3BNZw4G45qsnyRTopol8ESLnkfejmN_WcA&s"
   },
   {
     id: 2,
@@ -135,7 +135,7 @@ const mockMentorshipRequests = [
     message: "I'd like to discuss career paths in web development and get feedback on my portfolio.",
     requestDate: "2025-03-28",
     meetingDate: "2025-04-10, 3:00 PM",
-    profileImage: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=256&q=80"
+    profileImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_3BNZw4G45qsnyRTopol8ESLnkfejmN_WcA&s"
   }
 ];
 
