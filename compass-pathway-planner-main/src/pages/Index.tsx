@@ -28,13 +28,13 @@ const Index = () => {
             </Button>
           </div>
         </div>
-        <div className="md:w-1/2">
-          <div className="relative">
-            <div className="bg-compass-100 rounded-xl p-6 relative z-10">
-              <img 
+        <div className="md:w-1/2 flex justify-center">
+          <div className="relative  w-96 h-96">
+            <div className="bg-compass-100 rounded-full p-6 relative z-10">
+              <img  
                 src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKMyA9BLkZgoHUszWAZcZyFwEJJZOM0EuHIA&s" 
                 alt="Students planning their academic journey" 
-                className="rounded-lg shadow-lg"
+                className="rounded-full shadow-lg w-full h-full object-cover"
               />
             </div>
            
